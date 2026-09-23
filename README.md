@@ -668,9 +668,27 @@ Frontend будет доступен по адресу `http://localhost:5173`.
 
 ## Запуск проекта
 
-Команды запуска будут добавлены после создания backend и frontend. До этого необходимо подготовить:
+### Docker Compose
 
-- PostgreSQL;
-- базу данных проекта;
-- файл `.env` на основе `.env.example`;
-- API-ключ API-Football.
+Требуется Docker Desktop с поддержкой Docker Compose.
+
+```bash
+cp .env.docker.example .env
+docker compose up --build
+```
+
+Приложение будет доступно по адресу `http://localhost:8080`, Swagger API - по адресу `http://localhost:8080/api/docs`. PostgreSQL хранится в именованном volume и переживает перезапуск контейнеров.
+
+Для остановки контейнеров:
+
+```bash
+docker compose down
+```
+
+Для удаления базы вместе с volume:
+
+```bash
+docker compose down -v
+```
+
+Перед первым запуском укажите настоящий `JWT_SECRET_KEY` и, если нужна синхронизация с API-Football, `API_FOOTBALL_KEY` в `.env`.
